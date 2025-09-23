@@ -1,6 +1,7 @@
 import os
 import shutil
 from PIL import Image # !pip install pillow
+import cv2
 
 #확장자 : 원본 이미지의 확장자를 추가해줘라
 extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.avif')
@@ -16,6 +17,8 @@ def readFiles(dirs):
 
 # 순서대로 이름변경 ex) test001.jpg -> 0001.jpg, test3455.jpg -> 0002.jpg
 def changeFileName(files, src, dst):
+    #이미지 정렬
+    files.sort()
 
     for i, filename in enumerate(files, start=1):
         ext = os.path.splitext(filename)[1]
@@ -30,6 +33,22 @@ def changeFileName(files, src, dst):
         dst_path = os.path.join(dst, newname)
         #print(dst_path)
         shutil.copy2(src_path, dst_path)
+
+# 이미지 변경하여 새로운 폴더 저장
+def resizeImg(src, dst, width=500, height=500):
+    # 이미지 사이즈를 500 x 500
+    rsfiles = readFiles(src)
+
+    for file in rsfiles:
+        img = cv2.imread(os.path.join(dst, file))
+        width, height = img.shape[:2]
+        # if img is None:
+        #     print('No')
+        # else:
+        #     print('Yes')
+
+        resize_img = cv2.resize(img, (width, height), interpolation=cv2.INTER_CUBIC)
+        cv2.imwrite(os.path.join(dst, file), resize_img)
 
 
 
