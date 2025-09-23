@@ -1,6 +1,6 @@
 import os
 import utils.utility as util
-import setting as set
+import utils.setting as set
 
 def main():
     # 이름을 정렬하여 숫자증감으로 이름바꾸고 수정된 이미지 저장할 폴더 

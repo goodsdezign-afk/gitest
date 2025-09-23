@@ -2,9 +2,8 @@ import os
 import shutil
 from PIL import Image # !pip install pillow
 import cv2
+from . import setting as set
 
-#확장자 : 원본 이미지의 확장자를 추가해줘라
-extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.avif')
 
 # 디렉토리 생성
 def makeDir(dirs):
@@ -12,7 +11,7 @@ def makeDir(dirs):
 
 # 디렉토리내  모든 파일 불러오기
 def readFiles(dirs):
-    files = [f for f in os.listdir(dirs) if f.lower().endswith(extensions)]
+    files = [f for f in os.listdir(dirs) if f.lower().endswith(set.extensions)]
     return files
 
 # 순서대로 이름변경 ex) test001.jpg -> 0001.jpg, test3455.jpg -> 0002.jpg
