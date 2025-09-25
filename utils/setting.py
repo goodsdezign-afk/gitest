@@ -1,6 +1,9 @@
 import os
 #확장자 : 원본 이미지의 확장자를 추가해줘라
-extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.avif')
+imgextensions = ('.jpg', '.jpeg', '.png', '.bmp', '.gif', '.avif')
+
+#확장자 : 텍스트 확장자를 추가해줘라
+txtextensions = ('.txt')
 
 # 사용할 디렉토리 설정
 file_path = 'C:/Users/PC/Documents/dev/study/9-19/'
@@ -25,6 +28,8 @@ splits = {
 data_dir = ['train/', 'test/','valid/']
 
 aiData_path = os.path.join(file_path, 'wildfireData_1/')
+
+dfire_path = 'C:/Users/PC/Downloads/dFire/' 
 
 
 

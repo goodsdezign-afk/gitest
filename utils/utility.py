@@ -11,8 +11,13 @@ def makeDir(dirs):
     os.makedirs(dirs, exist_ok=True)
 
 # 디렉토리내  모든 파일 불러오기
-def readFiles(dirs):
-    files = [f for f in os.listdir(dirs) if f.lower().endswith(set.extensions)]
+def readFiles(dirs, ext):
+    if ext == 'img':
+        extension = set.imgextensions
+    else :
+        extension = set.txtextensions
+
+    files = [f for f in os.listdir(dirs) if f.lower().endswith(extension)]
     return files
 
 # 순서대로 이름변경 ex) test001.jpg -> 0001.jpg, test3455.jpg -> 0002.jpg
@@ -93,7 +98,27 @@ def copy_image_label(file_list, split_name):
 
 def splitDataCopy(files, split):
     copy_image_label(files, split)
-        
+
+
+def nullLabelDelete(files, split):
+    dataimg = os.path.join(set.dfire_path, split + 'images/')
+    datalbl = os.path.join(set.dfire_path, split + 'labels/')
+    dst_img = os.path.join(set.dfire_path+'delNullfire/', split + 'images/')
+    dst_lbl = os.path.join(set.dfire_path+'delNullfire/', split + 'labels/')
+    print(dataimg)
+
+
+    for lbl_file in files:
+        shutil.copy2(os.path.join(datalbl, lbl_file), os.path.join(dst_lbl, lbl_file))
+
+
+        #이미지 위치
+        img_file = f"{os.path.splitext(lbl_file)[0]}.jpg"  # name.txt -> name, .txt
+        src_img_path = os.path.join(dataimg, img_file)
+        dst_img_path = os.path.join(dst_img, img_file)
+
+        if os.path.exists(src_img_path):
+            shutil.copy2(src_img_path, dst_img_path)
 
 
 
